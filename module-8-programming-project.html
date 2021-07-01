@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 8 Programming Project</title>
+<style>* { font-family: monospace; }</style>
+<script>
+
+// NOTE: You must implement the data structures using the prototype approach.
+//       This is not what the book uses, so you have to convert it.
+//       See also: https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+
+// NOTE: Please review the following links regularly:
+//       https://it.pointpark.edu/tutorials/arrays-vs-objects/
+//       https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+//       https://it.pointpark.edu/tutorials/implementation-vs-interface/
+
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// 1. What is the worst case complexity of the following function?
+
+function hasDuplicates(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr.length; j++) {
+      if (i !== j && arr[i] === arr[j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+//O(n^2)
+
+// 2. Implement a faster version of the same function and analyze the
+//    complexity of this approach.
+
+function hasDuplicatesFast(arr) {
+  var num;
+  var index;
+
+  for (var i = arr.length - 1; i !== 0; i--) {
+    num = arr[i];
+    index = arr.indexOf(num);
+    if (i !== index) {
+      return true;
+    }
+  }
+  return false;
+}
+
+console.log(hasDuplicatesFast([1,2,3,4,5,6,7,8,9,10]));
+console.log(hasDuplicatesFast([1,2,3,4,6,5,6,7,8,9,10]));
+
+// 3. The travelling salesman problem is a another classic problem and we are
+//    going to solve it using a greedy algorithm. Before starting, please read
+//    through the article on Wikipedia:
+//      https://en.wikipedia.org/wiki/Travelling_salesman_problem
+//    Then implement the following:
+//    (a) Create a graph that represents the example symmetric TSP problem on
+//        the Wikipedia page.
+//    (b) Implement a greedy search that finds the shortest path. You should
+//        have the following steps: (1) pick node A as the starting position,
+//        (2) pick the closest neighbor that has not been visited as the next
+//        city to visit, (3) continue this process until returning to A,
+//        (4) print the final length of the path and also the sequence of
+//        the cities.
+//    (c) Check your results, do they make sense? Is is the optimal solution?
+
+//I have no idea how to go about doing this.
+
+// 4. Solve https://csacademy.com/contest/interview-archive/task/intersecting-rectangles/
+//    What is the runtime complexity of your solution?
+//    HINT: Try to break down the problems into smaller steps. For example,
+//          find a convenient way to represent rectangles and define a function
+//          that tests whether one rectangle is inside another. Then test your
+//          code on just two rectangles first to make sure it works.
+
+var Rectangle = function (x1, y1, x2, y2) {
+  var x1 = x1; //bottom left
+  var x2 = x2; //upper right
+  var y1 = y1; //bottom left
+  var y2 = y2; //upper right
+
+  this.crossingMathLogistics = function (num1, num2, rx1, ry1, rx2, ry2) {
+    if (num1 < num2) {
+      for (var i = num1; i < num2; i++) {
+        if ((rx1 < i && rx2 > i) && (ry1 < i && ry2 > i)) {
+          return true;
+        }
+      }
+    }
+    else {
+      for (var i = num1; i > num2; i--) {
+        console.log(i);
+        if ((rx1 < i && rx2 > i) && (ry1 < i && ry2 > i)) {
+          return true;
+      }
+    }
+  }
+  return false;
+};
+
+  this.crossing = function (rx1, ry1, rx2, ry2) {
+    var crossing;
+    crossing = this.crossingMathLogistics(x1, x2, rx1, ry1, rx2, ry2);
+    return crossing;
+  }
+
+  this.getX1 = function () {
+    return x1;
+  }
+
+  this.getY1 = function () {
+    return y1;
+  }
+  this.getX2 = function () {
+    return x2;
+  }
+  this.getY2 = function () {
+    return y2;
+  }
+};
+
+
+rec1 = new Rectangle (1, 1, 7, 10);
+rec2 = new Rectangle (3, 5, 10, 8);
+
+rec3 = new Rectangle (3, 2, 5, 8);
+rec4 = new Rectangle (7, 3, 10, 10);
+
+console.log(rec1.crossing(rec2.getX1(), rec2.getY1(), rec2.getX2(), rec2.getY2()));
+console.log(rec3.crossing(rec4.getX1(), rec4.getY1(), rec4.getX2(), rec4.getY2()));
+
+//Had a hard time getting it to work with more then 2 rectangles at the same time (the probelm uses 4 for the last example).  There is probably
+//a better solution then the one I provided, but with the short amount of time we get to work on these, this was the best I could come up with.
+//Given more time, I could have probably figured something better out, but the class is ending and I need to submit this before the due date.
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>
